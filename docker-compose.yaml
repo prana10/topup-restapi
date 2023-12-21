@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  topup-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    restart: always
+    container_name: topup-api
+    networks:
+      - topupnetworks
+    env_file:
+      - app.yaml
+    ports:
+      - 3030:3000
+    depends_on:
+      - db-production
+      - redis-production
+
+  db-production:
+    image: postgres:16-alpine
+    restart: always
+    container_name: db-production
+    networks:
+      - topupnetworks
+    env_file:
+      - app.yaml
+    ports:
+      - ${POSTGRES_PORT}:5432
+  redis-production:
+    image: 7.2.3-alpine
+    restart: always
+    container_name: redis-production
+    networks:
+      - topupnetworks
+
+networks:
+  topupnetworks:
+    driver: bridge
