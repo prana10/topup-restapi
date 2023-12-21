@@ -5,7 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: production
     restart: always
     container_name: topup-api
     networks:

@@ -5,7 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.local
-      target: development
     restart: always
     container_name: topup-api-local
     networks:
