@@ -27,9 +27,9 @@ services:
     env_file:
       - app.yaml
     ports:
-      - ${POSTGRES_PORT}:5432
+      - 54321:5432
   redis-production:
-    image: 7.2.3-alpine
+    image: redis:7.2.3-alpine
     restart: always
     container_name: redis-production
     networks:
